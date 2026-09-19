@@ -4,89 +4,89 @@
 
 # Frame
 
-**Browser ringan berbasis PyQt6 WebEngine, dibangun untuk laptop berspesifikasi rendah.**
+**A lightweight PyQt6 WebEngine browser, built for low-spec laptops.**
 
 [![Tests](https://img.shields.io/github/actions/workflow/status/<owner>/<repo>/tests.yml?branch=main&label=tests)](../../actions)
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](#-prasyarat-sistem)
-[![PyQt6](https://img.shields.io/badge/PyQt6-%E2%89%A56.6-41cd52)](#-prasyarat-sistem)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](#-lisensi)
-[![Version](https://img.shields.io/badge/version-0.2.0-orange)](#-status-proyek)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](#-system-requirements)
+[![PyQt6](https://img.shields.io/badge/PyQt6-%E2%89%A56.6-41cd52)](#-system-requirements)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](#-license)
+[![Version](https://img.shields.io/badge/version-0.2.0-orange)](#-project-status)
 
-**Bahasa:** 🇮🇩 Indonesia · [🇬🇧 English](./README.en.md)
+**Language:** [🇮🇩 Indonesia](./README.id.md) · 🇬🇧 English
 
 </div>
 
 ---
 
-## 📋 Daftar Isi
+## 📋 Table of Contents
 
-1. [Pengenalan](#-pengenalan)
-2. [Prasyarat Sistem](#-prasyarat-sistem)
-3. [Instalasi](#-instalasi)
-4. [Panduan Penggunaan](#-panduan-penggunaan)
-5. [Struktur Proyek & Dokumentasi Kode](#-struktur-proyek--dokumentasi-kode)
-6. [Pengujian](#-pengujian)
-7. [Keterbatasan yang Diketahui](#-keterbatasan-yang-diketahui)
-8. [Kontribusi](#-kontribusi)
-9. [Melaporkan Bug](#-melaporkan-bug)
-10. [Lisensi](#-lisensi)
-11. [Kontak](#-kontak)
-12. [Status Proyek](#-status-proyek)
+1. [Introduction](#-introduction)
+2. [System Requirements](#-system-requirements)
+3. [Installation](#-installation)
+4. [Usage Guide](#-usage-guide)
+5. [Project Structure & Code Documentation](#-project-structure--code-documentation)
+6. [Testing](#-testing)
+7. [Known Limitations](#-known-limitations)
+8. [Contributing](#-contributing)
+9. [Reporting Bugs](#-reporting-bugs)
+10. [License](#-license)
+11. [Contact](#-contact)
+12. [Project Status](#-project-status)
 
 ---
 
-## 📖 Pengenalan
+## 📖 Introduction
 
-**Frame** adalah browser web ringan yang dibangun di atas **PyQt6** dan mesin render **QtWebEngine (Chromium)**. Proyek ini dibuat untuk menjawab satu masalah spesifik: kebanyakan browser modern (Chrome, Edge, Firefox) cukup boros RAM/CPU, sehingga terasa berat di laptop berspesifikasi rendah — sementara alternatif browser "ringan" yang ada seringkali mengorbankan fitur keamanan dasar atau kenyamanan pemakaian sehari-hari.
+**Frame** is a lightweight web browser built on top of **PyQt6** and the **QtWebEngine (Chromium)** rendering engine. This project exists to address one specific problem: most modern browsers (Chrome, Edge, Firefox) are fairly heavy on RAM/CPU, making them sluggish on low-spec laptops — while existing "lightweight" browser alternatives often sacrifice basic security features or day-to-day usability to get there.
 
-Frame mencoba mengambil jalan tengah: tetap berbasis mesin Chromium yang matang dan aman (lewat QtWebEngine), tapi dengan konfigurasi, batasan proses, dan mode hemat daya yang bisa disesuaikan untuk perangkat dengan RAM terbatas — tanpa menghilangkan fitur inti yang diharapkan dari browser modern.
+Frame tries to strike a middle ground: it still runs on a mature, secure Chromium engine (via QtWebEngine), but with configuration, process limits, and a power-saving mode that can be tuned for devices with limited RAM — without dropping the core features expected from a modern browser.
 
-### ✨ Fitur Unggulan
+### ✨ Key Features
 
-| Kategori | Fitur |
+| Category | Features |
 |---|---|
-| **Performa** | Mode Hemat Daya (WebGL/PDF viewer off, batas proses renderer), auto-deteksi RAM sistem, auto-suspend tab idle dengan whitelist domain |
-| **Tab & Navigasi** | Multi-tab dengan pin, duplikat, buka ulang tab tertutup (`Ctrl+Shift+T`), restore session + posisi scroll, tab bar menyatu dengan title bar (gaya Chrome) |
-| **Privasi & Keamanan** | AdBlocker berbasis daftar host, jendela penyamaran (cache di memori, tanpa cookie persisten), proteksi kebocoran IP via WebRTC, whitelist skema URL (blokir `javascript:`, `data:`, `vbscript:`, dll.), manajer izin per-situs (kamera/mikrofon/lokasi/notifikasi) |
-| **Antarmuka** | Tema gelap/terang, jendela frameless dengan custom title bar + efek glow border, bookmark bar dengan overflow menu, temuan halaman (find-in-page), toast notification |
-| **Kenyamanan** | Bookmark, riwayat (maks. 5000 entri), manajer unduhan — semuanya dengan UI bawaan |
-| **Integrasi OS** | Bisa didaftarkan sebagai kandidat default browser (Windows/Linux), single-instance dengan IPC (klik link dari aplikasi lain akan diteruskan ke jendela yang sudah terbuka, bukan membuka jendela baru) |
+| **Performance** | Low-End Mode (WebGL/PDF viewer disabled, renderer process limits), automatic system RAM detection, auto-suspend for idle tabs with a domain whitelist |
+| **Tabs & Navigation** | Multi-tab with pin, duplicate, reopen closed tab (`Ctrl+Shift+T`), session + scroll-position restore, tab strip merged into the title bar (Chrome-style) |
+| **Privacy & Security** | Host-list based AdBlocker, private browsing window (in-memory cache, no persistent cookies), WebRTC IP-leak protection, URL scheme whitelist (blocks `javascript:`, `data:`, `vbscript:`, etc.), per-site permission manager (camera/microphone/location/notifications) |
+| **Interface** | Dark/light theme, frameless window with a custom title bar + glow border effect, bookmark bar with an overflow menu, find-in-page, toast notifications |
+| **Convenience** | Bookmarks, history (max. 5,000 entries), download manager — all with built-in UI |
+| **OS Integration** | Can be registered as a default-browser candidate (Windows/Linux), single-instance with IPC (a link clicked from another app is forwarded to the already-open window instead of opening a new one) |
 
-### 🛠️ Teknologi Utama
+### 🛠️ Core Technologies
 
-- **[Python](https://www.python.org/)** 3.10+ — bahasa utama
-- **[PyQt6](https://www.riverbankcomputing.com/software/pyqt/)** — binding Qt6 untuk antarmuka desktop
-- **[PyQt6-WebEngine](https://pypi.org/project/PyQt6-WebEngine/)** (Chromium/QtWebEngine) — mesin render halaman web
-- **[pytest](https://pytest.org/)** — kerangka pengujian otomatis
-- **[PyInstaller](https://pyinstaller.org/)** — pembuatan build standalone (`.exe`/binary)
-- **GitHub Actions** — CI, menjalankan test matrix di Ubuntu/Windows/macOS × Python 3.10/3.12
+- **[Python](https://www.python.org/)** 3.10+ — primary language
+- **[PyQt6](https://www.riverbankcomputing.com/software/pyqt/)** — Qt6 bindings for the desktop UI
+- **[PyQt6-WebEngine](https://pypi.org/project/PyQt6-WebEngine/)** (Chromium/QtWebEngine) — web page rendering engine
+- **[pytest](https://pytest.org/)** — automated test framework
+- **[PyInstaller](https://pyinstaller.org/)** — standalone build packaging (`.exe`/binary)
+- **GitHub Actions** — CI, running the test matrix on Ubuntu/Windows/macOS × Python 3.10/3.12
 
-> Frame **tidak** menggunakan database eksternal maupun server backend — semua data (bookmark, riwayat, sesi, pengaturan) disimpan lokal dalam file JSON di direktori data pengguna. Tidak ada file `.env` yang dibutuhkan untuk menjalankan proyek ini.
+> Frame does **not** use an external database or backend server — all data (bookmarks, history, session, settings) is stored locally as JSON files in the user's data directory. No `.env` file is required to run this project.
 
 ---
 
-## 💻 Prasyarat Sistem
+## 💻 System Requirements
 
-Pastikan hal-hal berikut terpenuhi sebelum instalasi:
+Make sure the following are in place before installing:
 
-| Kebutuhan | Versi Minimum | Keterangan |
+| Requirement | Minimum Version | Notes |
 |---|---|---|
-| **Python** | 3.10 atau lebih baru | Cek dengan `python --version` |
-| **pip** | Versi terbaru disarankan | `python -m pip install --upgrade pip` |
-| **RAM** | 4 GB (minimum), 8 GB (disarankan) | Di bawah 4 GB, Mode Hemat Daya otomatis aktif |
-| **Sistem Operasi** | Windows 10+, macOS 11+, atau Linux (X11/Wayland) | |
-| **Ruang disk** | ± 500 MB kosong | Untuk dependensi PyQt6 + komponen Chromium bawaan QtWebEngine |
+| **Python** | 3.10 or newer | Check with `python --version` |
+| **pip** | Latest version recommended | `python -m pip install --upgrade pip` |
+| **RAM** | 4 GB (minimum), 8 GB (recommended) | Below 4 GB, Low-End Mode is enabled automatically |
+| **Operating System** | Windows 10+, macOS 11+, or Linux (X11/Wayland) | |
+| **Disk space** | ~500 MB free | For PyQt6 dependencies + QtWebEngine's bundled Chromium components |
 
-### Dependensi Python (terpasang otomatis lewat `pip install`)
+### Python dependencies (installed automatically via `pip install`)
 
 - `PyQt6 >= 6.6`
 - `PyQt6-WebEngine >= 6.6`
-- *(opsional, dev)* `pytest >= 7.0`
-- *(opsional, perf)* `psutil >= 5.9`
+- *(optional, dev)* `pytest >= 7.0`
+- *(optional, perf)* `psutil >= 5.9`
 
-### Library sistem tambahan (khusus Linux)
+### Additional system libraries (Linux only)
 
-QtWebEngine butuh beberapa library sistem yang biasanya tidak terpasang secara default:
+QtWebEngine needs a few system libraries that are usually not installed by default:
 
 ```bash
 sudo apt install libegl1 libgl1 libxkbcommon-x11-0 \
@@ -95,25 +95,25 @@ sudo apt install libegl1 libgl1 libxkbcommon-x11-0 \
   libxcb-xfixes0 libxcb-sync1 libxcb-xkb1 libdbus-1-3
 ```
 
-> Windows dan macOS tidak butuh langkah tambahan ini — semua dependensi native sudah dibawa oleh wheel `PyQt6-WebEngine`.
+> Windows and macOS don't need this extra step — all native dependencies already ship inside the `PyQt6-WebEngine` wheel.
 
 ---
 
-## 🚀 Instalasi
+## 🚀 Installation
 
-### 1. Kloning repositori
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/<owner>/<repo>.git
 cd <repo>
 ```
 
-### 2. Buat virtual environment (sangat disarankan)
+### 2. Create a virtual environment (strongly recommended)
 
 ```bash
 python -m venv .venv
 
-# Aktifkan:
+# Activate it:
 # Windows (PowerShell)
 .venv\Scripts\Activate.ps1
 # Windows (cmd)
@@ -122,278 +122,278 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Instal proyek beserta dependensinya
+### 3. Install the project and its dependencies
 
 ```bash
-# Instalasi standar
+# Standard install
 pip install -e .
 
-# Kalau ingin sekalian menjalankan test suite (dev)
+# If you also want to run the test suite (dev)
 pip install -e ".[dev]"
 
-# Kalau ingin fitur deteksi RAM yang lebih akurat (opsional)
+# If you want more accurate RAM detection (optional)
 pip install -e ".[perf]"
 ```
 
-Perintah `pip install -e .` membaca `pyproject.toml`, memasang `PyQt6`/`PyQt6-WebEngine`, dan mendaftarkan perintah `frame` sebagai entry point (lihat bagian `[project.scripts]` di `pyproject.toml`).
+Running `pip install -e .` reads `pyproject.toml`, installs `PyQt6`/`PyQt6-WebEngine`, and registers the `frame` command as an entry point (see the `[project.scripts]` section in `pyproject.toml`).
 
-### 4. Variabel lingkungan & konfigurasi
+### 4. Environment variables & configuration
 
-Frame **tidak memerlukan file `.env`**. Tidak ada API key, secret, atau koneksi database yang perlu dikonfigurasi sebelum menjalankan aplikasi. Satu-satunya environment variable yang relevan bersifat opsional:
+Frame **does not require a `.env` file**. There's no API key, secret, or database connection to configure before running the app. The only relevant environment variable is optional:
 
-| Variabel | Fungsi | Wajib? |
+| Variable | Purpose | Required? |
 |---|---|---|
-| `QTWEBENGINE_CHROMIUM_FLAGS` | Override flag Chromium yang dipakai Frame secara default (mis. untuk eksperimen performa) | Tidak — kalau di-set manual, Frame akan menampilkan warning di stderr bahwa flag bawaannya (termasuk proteksi WebRTC) tidak diterapkan |
+| `QTWEBENGINE_CHROMIUM_FLAGS` | Overrides the Chromium flags Frame applies by default (e.g. for performance experiments) | No — if set manually, Frame will print a warning to stderr that its built-in flags (including WebRTC protection) are not being applied |
 
-Pengaturan aplikasi sehari-hari (tema, mode hemat daya, whitelist auto-suspend, dsb.) **tidak** diatur lewat file konfigurasi manual — semuanya tersedia lewat menu **Settings** di dalam aplikasi setelah dijalankan, dan otomatis tersimpan sebagai JSON di direktori data pengguna.
+Day-to-day app settings (theme, low-end mode, auto-suspend whitelist, etc.) are **not** configured through a manual config file — they're all available from the in-app **Settings** menu once the app is running, and are automatically saved as JSON in the user's data directory.
 
 ### 5. Database
 
-**Tidak ada database yang perlu disiapkan.** Bookmark, riwayat, sesi, dan pengaturan disimpan sebagai file JSON lokal (dikelola oleh modul `frame/store.py`), dibuat otomatis saat aplikasi pertama kali dijalankan.
+**No database needs to be set up.** Bookmarks, history, session, and settings are stored as local JSON files (managed by the `frame/store.py` module), created automatically the first time the app runs.
 
 ---
 
-## 📘 Panduan Penggunaan
+## 📘 Usage Guide
 
-### Menjalankan di lingkungan pengembangan
+### Running in a development environment
 
-Dari root direktori proyek (dengan virtual environment aktif):
+From the project root (with the virtual environment active):
 
 ```bash
 python -m frame
 ```
 
-Alternatif — kalau proyek sudah ter-install (`pip install -e .`), bisa juga langsung:
+Alternative — if the project is already installed (`pip install -e .`), you can also run it directly:
 
 ```bash
 frame
 ```
 
-Saat pertama kali dijalankan, Frame otomatis mendeteksi RAM sistem. Kalau RAM terdeteksi di bawah 4 GB, **Mode Hemat Daya** akan aktif otomatis (bisa diubah manual kapan saja lewat Settings).
+On first launch, Frame automatically detects the system's RAM. If less than 4 GB is detected, **Low-End Mode** is enabled automatically (this can be changed manually at any time from Settings).
 
-### Membuka URL langsung dari command line
+### Opening a URL directly from the command line
 
 ```bash
 python -m frame https://example.com
 ```
 
-Kalau Frame sudah berjalan (instance lain terdeteksi lewat mekanisme single-instance), URL akan otomatis diteruskan ke jendela yang sudah terbuka — bukan membuka jendela baru.
+If Frame is already running (another instance is detected via the single-instance mechanism), the URL is automatically forwarded to the already-open window instead of opening a new one.
 
-### Menjalankan test suite
+### Running the test suite
 
 ```bash
 pytest -q
 ```
 
-### Membangun executable standalone (build "produksi")
+### Building a standalone executable ("production" build)
 
-Frame sudah menyediakan `Frame.spec` untuk [PyInstaller](https://pyinstaller.org/):
+Frame already ships a `Frame.spec` file for [PyInstaller](https://pyinstaller.org/):
 
 ```bash
 pip install pyinstaller
 pyinstaller Frame.spec
 ```
 
-Hasil build akan muncul di folder `dist/`.
+The build output will appear in the `dist/` folder.
 
-### Menjadikan Frame sebagai kandidat default browser (opsional)
+### Registering Frame as a default-browser candidate (optional)
 
-- **Windows**: jalankan `python scripts/install_windows_default.py` lalu ikuti instruksi di layar (import file `.reg` yang dihasilkan, lalu pilih Frame secara manual lewat *Settings → Apps → Default apps* — Windows tidak mengizinkan aplikasi mengubah default browser secara otomatis).
-- **Linux**: gunakan berkas `.desktop` standar (`xdg-settings set default-web-browser frame.desktop`).
+- **Windows**: run `python scripts/install_windows_default.py` and follow the on-screen instructions (import the generated `.reg` file, then manually select Frame via *Settings → Apps → Default apps* — Windows doesn't allow apps to change the default browser automatically).
+- **Linux**: use a standard `.desktop` file (`xdg-settings set default-web-browser frame.desktop`).
 
-### Contoh penggunaan fitur utama
+### Basic usage examples
 
-| Aksi | Cara |
+| Action | How |
 |---|---|
-| Tab baru | `Ctrl+T` atau klik ikon `+` |
-| Buka ulang tab yang baru ditutup | `Ctrl+Shift+T` |
-| Pindah tab | `Ctrl+Tab` / klik tab |
-| Cari di halaman | `Ctrl+F` |
-| Jendela penyamaran | Menu ☰ → *New Private Window* |
+| New tab | `Ctrl+T` or click the `+` icon |
+| Reopen the last closed tab | `Ctrl+Shift+T` |
+| Switch tabs | `Ctrl+Tab` / click a tab |
+| Find in page | `Ctrl+F` |
+| Private window | ☰ menu → *New Private Window* |
 | Fullscreen | `F11` |
-| Buka Settings (tema, mode hemat daya, auto-suspend) | Menu ☰ → *Settings* |
+| Open Settings (theme, low-end mode, auto-suspend) | ☰ menu → *Settings* |
 
 ---
 
-## 🗂️ Struktur Proyek & Dokumentasi Kode
+## 🗂️ Project Structure & Code Documentation
 
 ```
 browser3/
-├── frame/                      # Source code utama (package Python)
+├── frame/                      # Main source code (Python package)
 │   ├── __main__.py             # Entry point: python -m frame
-│   ├── core.py                 # Path, logging, i18n, deteksi RAM, flag Chromium
-│   ├── main_window.py          # Jendela utama (frameless + tab + toolbar)
+│   ├── core.py                 # Paths, logging, i18n, RAM detection, Chromium flags
+│   ├── main_window.py          # Main window (frameless + tabs + toolbar)
 │   ├── web.py                  # WebView, BrowserTab, BrowserTabBar, FrameWebPage
-│   ├── tab_container.py        # Pemisah QTabBar dari QStackedWidget (tab di title bar)
-│   ├── titlebar.py             # Custom title bar (drag, resize, tombol jendela)
-│   ├── chrome.py               # Window chrome frameless + efek glow border
-│   ├── ui_bars.py              # FindBar, BookmarkBar (dengan overflow), DownloadShelf
-│   ├── theme.py                # Warna tema, stylesheet QSS, Qt palette
-│   ├── icons.py                # Render ikon SVG → QIcon (DPI-aware, cached)
-│   ├── dialogs.py               # Dialog Bookmarks, History, Downloads, Settings
-│   ├── store.py                # Persistensi: bookmark, riwayat, sesi, pengaturan (JSON)
-│   ├── suspend_manager.py      # Auto-suspend tab idle, pin, whitelist
-│   ├── permissions.py          # Manajer izin per-origin (kamera, mikrofon, dll.)
-│   ├── adblock.py              # AdBlocker berbasis daftar host
-│   ├── internal.py             # Skema `frame://` + halaman New Tab
-│   ├── private_window.py       # Jendela penyamaran (wrapper MainWindow)
+│   ├── tab_container.py        # Decouples QTabBar from QStackedWidget (tabs in title bar)
+│   ├── titlebar.py             # Custom title bar (drag, resize, window buttons)
+│   ├── chrome.py               # Frameless window chrome + glow border effect
+│   ├── ui_bars.py              # FindBar, BookmarkBar (with overflow), DownloadShelf
+│   ├── theme.py                # Theme colors, QSS stylesheet, Qt palette
+│   ├── icons.py                # SVG icon → QIcon rendering (DPI-aware, cached)
+│   ├── dialogs.py               # Bookmarks, History, Downloads, Settings dialogs
+│   ├── store.py                # Persistence: bookmarks, history, session, settings (JSON)
+│   ├── suspend_manager.py      # Idle tab auto-suspend, pinning, whitelist
+│   ├── permissions.py          # Per-origin permission manager (camera, mic, etc.)
+│   ├── adblock.py              # Host-list based AdBlocker
+│   ├── internal.py             # `frame://` scheme + New Tab page
+│   ├── private_window.py       # Private browsing window (MainWindow wrapper)
 │   ├── singleton.py            # Single-instance IPC (QLocalServer/QLocalSocket)
-│   ├── spinner.py              # Indikator loading berputar di tab
-│   ├── toast.py                # Notifikasi toast non-blocking
-│   └── data/                   # Aset statis: adblock_hosts.txt, ikon, string i18n
-├── scripts/                     # Script pendukung (registrasi default browser Windows)
-├── tests/                       # Unit test (pytest)
-├── run_frame.py                 # Entry point khusus untuk PyInstaller
-├── Frame.spec                   # Konfigurasi build PyInstaller
-├── pyproject.toml                # Metadata proyek & dependensi
-└── .github/workflows/tests.yml   # CI: test matrix (3 OS × 2 versi Python)
+│   ├── spinner.py              # Spinning loading indicator on tabs
+│   ├── toast.py                # Non-blocking toast notifications
+│   └── data/                   # Static assets: adblock_hosts.txt, icons, i18n strings
+├── scripts/                     # Support scripts (Windows default-browser registration)
+├── tests/                       # Unit tests (pytest)
+├── run_frame.py                 # Dedicated entry point for PyInstaller
+├── Frame.spec                   # PyInstaller build configuration
+├── pyproject.toml                # Project metadata & dependencies
+└── .github/workflows/tests.yml   # CI: test matrix (3 OSes × 2 Python versions)
 ```
 
-### Penjelasan modul-modul utama
+### Overview of the main modules
 
 <details>
-<summary><strong>frame/core.py</strong> — Fondasi aplikasi</summary>
+<summary><strong>frame/core.py</strong> — Application foundation</summary>
 
-Berisi path direktori data, setup logging, loader i18n, daftar mesin pencari, validasi keamanan URL (`is_safe_url`), dan logika deteksi RAM + pembangunan flag Chromium (`pre_init_should_use_low_end()`, `detect_total_ram_gb()`). Fungsi-fungsi ini dipanggil paling awal, **sebelum** `QApplication` dibuat.
+Contains data-directory paths, logging setup, the i18n loader, the list of search engines, URL safety validation (`is_safe_url`), and the RAM-detection + Chromium-flag-building logic (`pre_init_should_use_low_end()`, `detect_total_ram_gb()`). These functions are called very early, **before** `QApplication` is created.
 </details>
 
 <details>
-<summary><strong>frame/main_window.py</strong> — Jendela utama</summary>
+<summary><strong>frame/main_window.py</strong> — Main window</summary>
 
-Kelas `MainWindow`: merangkai toolbar navigasi, address bar, tab container, dan seluruh dialog. Menangani restore session, shortcut keyboard, serta koordinasi antar-modul (tema, suspend manager, permission manager).
+The `MainWindow` class: assembles the navigation toolbar, address bar, tab container, and all dialogs. Handles session restore, keyboard shortcuts, and coordination between modules (theme, suspend manager, permission manager).
 </details>
 
 <details>
-<summary><strong>frame/web.py</strong> — Lapisan web engine</summary>
+<summary><strong>frame/web.py</strong> — Web engine layer</summary>
 
-`WebView` (subclass `QWebEngineView`), `BrowserTab` (satu tab = satu `WebView` + metadata), `BrowserTabBar` (tab bar custom dengan lebar tetap & elide), dan `FrameWebPage` (subclass `QWebEnginePage` untuk intercept navigasi, permission request, dan fullscreen).
+`WebView` (a `QWebEngineView` subclass), `BrowserTab` (one tab = one `WebView` + metadata), `BrowserTabBar` (custom tab bar with fixed width & eliding), and `FrameWebPage` (a `QWebEnginePage` subclass for intercepting navigation, permission requests, and fullscreen).
 </details>
 
 <details>
-<summary><strong>frame/store.py</strong> — Persistensi data</summary>
+<summary><strong>frame/store.py</strong> — Data persistence</summary>
 
-Kelas `Store`: baca/tulis bookmark, riwayat (dibatasi `deque` 5000 entri), sesi tab terakhir, dan pengaturan pengguna — semuanya sebagai file JSON di direktori data. Tidak ada dependensi database eksternal.
+The `Store` class: reads/writes bookmarks, history (capped at 5,000 entries via a `deque`), the last tab session, and user settings — all as local JSON files in the data directory. No external database dependency.
 </details>
 
 <details>
-<summary><strong>frame/suspend_manager.py</strong> — Manajemen tab idle</summary>
+<summary><strong>frame/suspend_manager.py</strong> — Idle tab management</summary>
 
-Menidurkan tab yang tidak aktif melebihi durasi tertentu (default 180 detik) untuk menghemat RAM, dengan pengecualian untuk tab yang di-pin, domain whitelist, atau tab dengan form yang belum disubmit.
+Suspends tabs that have been inactive beyond a certain duration (default 180 seconds) to save RAM, with exceptions for pinned tabs, whitelisted domains, or tabs with an unsubmitted form.
 </details>
 
 <details>
-<summary><strong>frame/permissions.py</strong> — Izin per-situs</summary>
+<summary><strong>frame/permissions.py</strong> — Per-site permissions</summary>
 
-Menangani sinyal <code>featurePermissionRequested</code> dari <code>QWebEnginePage</code> (kamera, mikrofon, lokasi, notifikasi, clipboard, mouse lock). Keputusan izin disimpan per-origin sehingga tidak perlu ditanya berulang kali.
+Handles the <code>featurePermissionRequested</code> signal from <code>QWebEnginePage</code> (camera, microphone, location, notifications, clipboard, mouse lock). Permission decisions are stored per-origin so the user isn't asked repeatedly.
 </details>
 
 <details>
-<summary><strong>frame/adblock.py</strong> — Pemblokir iklan</summary>
+<summary><strong>frame/adblock.py</strong> — Ad blocker</summary>
 
-AdBlocker sederhana berbasis pencocokan host dari <code>frame/data/adblock_hosts.txt</code>, bisa ditambah (override) lewat file <code>filters.txt</code> di direktori data pengguna. Aktif di semua mode, termasuk jendela penyamaran.
+A simple AdBlocker based on host matching from <code>frame/data/adblock_hosts.txt</code>, extendable (overridable) via a <code>filters.txt</code> file in the user's data directory. Active in every mode, including private browsing.
 </details>
 
-> Setiap modul memiliki docstring di baris paling atas file yang menjelaskan tanggung jawabnya secara singkat — silakan buka langsung file terkait untuk detail parameter dan nilai kembalian tiap fungsi/kelas.
+> Every module has a docstring at the top of the file briefly explaining its responsibility — open the relevant file directly for details on each function/class's parameters and return values.
 
 ---
 
-## 🧪 Pengujian
+## 🧪 Testing
 
-Proyek ini memiliki unit test di direktori `tests/`, mencakup:
+This project has unit tests under `tests/`, covering:
 
-- `test_adblock.py` — pencocokan host & parsing filter AdBlocker
-- `test_permissions.py` — logika keputusan izin, persistensi, mode privat
-- `test_store.py` — bookmark, riwayat, top sites, I/O JSON
-- `test_suspend_manager.py` — whitelist, toggle, deteksi form "dirty" secara async
-- `test_url_safety.py` — validasi skema URL yang diizinkan
+- `test_adblock.py` — AdBlocker host matching & filter parsing
+- `test_permissions.py` — permission decision logic, persistence, private mode
+- `test_store.py` — bookmarks, history, top sites, JSON I/O
+- `test_suspend_manager.py` — whitelist, toggling, async "dirty form" detection
+- `test_url_safety.py` — allowed URL scheme validation
 
-Jalankan seluruh test:
+Run the whole suite:
 
 ```bash
 pytest -q
 ```
 
-CI (GitHub Actions, `.github/workflows/tests.yml`) menjalankan test ini otomatis di setiap `push`/`pull request` ke branch `main`/`master`, pada matriks **Ubuntu, Windows, dan macOS** × **Python 3.10 dan 3.12**.
+CI (GitHub Actions, `.github/workflows/tests.yml`) runs these tests automatically on every `push`/`pull request` to the `main`/`master` branch, across a matrix of **Ubuntu, Windows, and macOS** × **Python 3.10 and 3.12**.
 
-Ada juga `.pre-commit-config.yaml` opsional yang menjalankan `pytest` otomatis sebelum setiap `git commit` (aktifkan dengan `pre-commit install`).
-
----
-
-## ⚠️ Keterbatasan yang Diketahui
-
-- **WebRTC**: Frame membatasi ICE candidate ke interface publik saja (`--force-webrtc-ip-handling-policy=default_public_interface_only`) untuk menutup celah kebocoran IP asli saat VPN aktif. Bisa dimatikan lewat *Settings → Privacy*.
-- **User-Agent**: Frame **sengaja tidak menyamarkan** User-Agent QtWebEngine. Menyamarkan UA tanpa menyesuaikan Client Hints justru bisa membuat fingerprint lebih mencolok, dan tidak menyelesaikan fingerprinting dari sinyal lain (TLS ClientHello, canvas/WebGL, font list, dll).
-- **DNS**: Query DNS keluar plaintext ke resolver OS (belum ada DNS-over-HTTPS bawaan). Sama seperti perilaku default mayoritas browser lain.
-- **Permission default**: Semua permintaan izin situs web (kamera, mikrofon, lokasi, dll.) **ditolak secara default** kecuali pengguna mengizinkan secara eksplisit.
-- **Bukan pengganti browser lengkap**: belum ada extension, bookmark sync antar-perangkat, atau password manager terintegrasi — cocok untuk pemakaian pribadi/eksperimen, belum ideal sebagai browser harian utama bagi pengguna umum.
+There's also an optional `.pre-commit-config.yaml` that runs `pytest` automatically before every `git commit` (enable it with `pre-commit install`).
 
 ---
 
-## 🤝 Kontribusi
+## ⚠️ Known Limitations
 
-Kontribusi dalam bentuk apa pun — laporan bug, ide fitur, atau pull request — sangat diterima.
+- **WebRTC**: Frame restricts ICE candidates to public interfaces only (`--force-webrtc-ip-handling-policy=default_public_interface_only`) to close the classic "WebRTC leak" that exposes your real IP while a VPN is active. Can be turned off from *Settings → Privacy*.
+- **User-Agent**: Frame **deliberately does not spoof** the QtWebEngine User-Agent. Spoofing the UA without also adjusting Client Hints can make the fingerprint even more distinctive, and doesn't solve fingerprinting from other signals (TLS ClientHello, canvas/WebGL, font list, etc.) anyway.
+- **DNS**: DNS queries go out in plaintext to the OS resolver (no built-in DNS-over-HTTPS yet). This matches the default behavior of most other browsers.
+- **Default permissions**: All web permission requests (camera, microphone, location, etc.) are **denied by default** unless the user explicitly grants them.
+- **Not a full browser replacement**: no extensions, no cross-device bookmark sync, and no integrated password manager yet — good for personal use/experimentation, not yet ideal as a general user's daily-driver browser.
 
-1. **Fork** repositori ini, lalu buat branch baru dari `main`:
+---
+
+## 🤝 Contributing
+
+Contributions of any kind — bug reports, feature ideas, or pull requests — are very welcome.
+
+1. **Fork** this repository, then create a new branch from `main`:
    ```bash
-   git checkout -b fitur/nama-fitur-anda
+   git checkout -b feature/your-feature-name
    ```
-2. Pastikan lingkungan dev terpasang: `pip install -e ".[dev]"`.
-3. Tulis/lengkapi test untuk perubahan Anda di `tests/`.
-4. Jalankan test suite sebelum commit:
+2. Make sure your dev environment is installed: `pip install -e ".[dev]"`.
+3. Write/update tests for your change under `tests/`.
+4. Run the test suite before committing:
    ```bash
    pytest -q
    ```
-5. (Opsional tapi disarankan) aktifkan pre-commit hook: `pre-commit install`.
-6. Commit dengan pesan yang jelas, lalu buka **Pull Request** ke branch `main` dengan deskripsi perubahan dan alasannya.
+5. (Optional but recommended) enable the pre-commit hook: `pre-commit install`.
+6. Commit with a clear message, then open a **Pull Request** against `main` describing the change and the reasoning behind it.
 
-Untuk perubahan besar (mis. redesign UI atau perubahan arsitektur), disarankan membuka **Issue** diskusi terlebih dahulu sebelum mulai coding, supaya arahnya sejalan dengan tujuan proyek.
-
----
-
-## 🐛 Melaporkan Bug
-
-Sebelum melapor, cek dulu apakah masalah serupa sudah ada di daftar **Issues**. Kalau belum, buat issue baru dan sertakan informasi berikut supaya lebih cepat ditelusuri:
-
-- **Versi Frame** (lihat `frame/__init__.py` → `__version__`, atau `pyproject.toml`)
-- **Sistem Operasi** dan versinya (mis. Windows 11 23H2)
-- **Versi Python** (`python --version`) dan **PyQt6** (`pip show PyQt6`)
-- **Langkah reproduksi** yang jelas dan terurut
-- **Perilaku yang diharapkan** vs **yang terjadi**
-- **Log konsol** saat menjalankan `python -m frame` dari terminal (bukan double-click), termasuk pesan error/traceback kalau ada
-- **Screenshot/rekaman layar** kalau berkaitan dengan tampilan/UI
+For larger changes (e.g. a UI redesign or architectural change), it's a good idea to open a discussion **Issue** first before writing code, to make sure the direction lines up with the project's goals.
 
 ---
 
-## 📄 Lisensi
+## 🐛 Reporting Bugs
 
-Proyek ini dilisensikan di bawah **Lisensi MIT** — lihat berkas [`LICENSE`](./LICENSE) untuk teks lengkapnya.
+Before filing a report, check whether a similar issue already exists. If not, open a new issue and include the following so it can be diagnosed faster:
 
----
-
-## 📬 Kontak
-
-Cara tercepat untuk bertanya, memberi saran, atau melaporkan masalah adalah lewat **GitHub Issues** di repositori ini. Isi bagian kontak lain di bawah sesuai preferensi Anda sebagai pengelola proyek:
-
-- **Issues/Diskusi**: gunakan tab *Issues* di repositori GitHub ini
-- **Pengelola proyek**: `<isi nama/username Anda>`
-- **Email** *(opsional)*: `<isi email kontak Anda>`
+- **Frame version** (see `frame/__init__.py` → `__version__`, or `pyproject.toml`)
+- **Operating system** and version (e.g. Windows 11 23H2)
+- **Python version** (`python --version`) and **PyQt6** version (`pip show PyQt6`)
+- **Clear, ordered reproduction steps**
+- **Expected behavior** vs. **actual behavior**
+- **Console log** from running `python -m frame` in a terminal (not by double-clicking), including any error/traceback
+- **Screenshot/screen recording**, if it's UI/appearance-related
 
 ---
 
-## 📊 Status Proyek
+## 📄 License
 
-| Aspek | Status |
+This project is licensed under the **MIT License** — see the [`LICENSE`](./LICENSE) file for the full text.
+
+---
+
+## 📬 Contact
+
+The fastest way to ask questions, suggest ideas, or report issues is through **GitHub Issues** on this repository. Fill in the other contact details below as you prefer, as the project maintainer:
+
+- **Issues/Discussion**: use the *Issues* tab on this GitHub repository
+- **Maintainer**: `<your name/username>`
+- **Email** *(optional)*: `<your contact email>`
+
+---
+
+## 📊 Project Status
+
+| Aspect | Status |
 |---|---|
-| **Versi rilis terbaru** | `0.2.0` (lihat `pyproject.toml`) |
-| **Status pengembangan** | Aktif dikembangkan (pre-1.0, belum direkomendasikan untuk distribusi luas ke pengguna awam) |
-| **CI/Build** | GitHub Actions — test matrix 3 OS × 2 versi Python (lihat badge di atas) |
-| **Cakupan pengujian** | 5 modul inti tercakup unit test (`adblock`, `permissions`, `store`, `suspend_manager`, `url_safety`) |
-| **Platform didukung** | Windows 10+, macOS 11+, Linux (X11/Wayland) |
+| **Latest release version** | `0.2.0` (see `pyproject.toml`) |
+| **Development status** | Actively developed (pre-1.0, not yet recommended for wide distribution to general users) |
+| **CI/Build** | GitHub Actions — test matrix across 3 OSes × 2 Python versions (see badge above) |
+| **Test coverage** | 5 core modules covered by unit tests (`adblock`, `permissions`, `store`, `suspend_manager`, `url_safety`) |
+| **Supported platforms** | Windows 10+, macOS 11+, Linux (X11/Wayland) |
 
 ---
 
 <div align="center">
 
-Dibuat dengan 🖤 menggunakan Python & PyQt6.
+Built with 🖤 using Python & PyQt6.
 
 </div>
