@@ -1,0 +1,12 @@
+{
+  "app.name": "Frame",
+  "tab.new": "Tab Baru",
+  "private.title": "Frame — Penyamaran",
+  "menu.settings": "Pengaturan",
+  "url.blocked": "URL tidak diizinkan: {url}",
+  "nav.blocked": "Navigasi diblokir: {url}",
+  "tab.limit.title": "Batas tab",
+  "tab.limit.body": "Sudah ada {count} tab (batas: {max}).\n\nTutup beberapa tab, atau ubah batas di Pengaturan → Performa & Sumber Daya.",
+  "low_end.title": "Mode Hemat Daya Aktif",
+  "low_end.body": "Frame mendeteksi RAM sekitar <b>{ram:.1f} GB</b>.<br><br>Mode <b>Hemat Daya</b> telah diaktifkan otomatis:<br>• Batas maksimum tab: 8<br>• Tab idle ditidurkan otomatis setelah 2 menit<br>• WebGL & PDF viewer dimatikan<br>• Renderer Chromium dibatasi<br><br>Anda bisa mengubah semua ini di <b>Pengaturan → Performa & Sumber Daya</b>."
+}

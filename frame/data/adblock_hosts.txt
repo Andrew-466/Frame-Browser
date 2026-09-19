@@ -1,0 +1,79 @@
+# Daftar host yang diblokir (satu per baris).
+# Referensi: EasyList / EasyPrivacy (ringkasan).
+# Baris yang dimulai '#' diabaikan.
+
+# Google ads
+doubleclick.net
+googleadservices.com
+googlesyndication.com
+google-analytics.com
+googletagmanager.com
+googletagservices.com
+adservice.google.com
+pagead2.googlesyndication.com
+
+# Facebook & sosial
+connect.facebook.net
+
+# Ad networks
+adnxs.com
+adsrvr.org
+criteo.com
+criteo.net
+taboola.com
+outbrain.com
+pubmatic.com
+rubiconproject.com
+casalemedia.com
+openx.net
+smartadserver.com
+yieldmo.com
+sharethrough.com
+districtm.io
+sovrn.com
+indexww.com
+advertising.com
+adcolony.com
+applovin.com
+unityads.unity3d.com
+
+# Analytics & tracking
+scorecardresearch.com
+quantserve.com
+moatads.com
+hotjar.com
+segment.io
+segment.com
+mixpanel.com
+amplitude.com
+heapanalytics.com
+fullstory.com
+crazyegg.com
+mouseflow.com
+luckyorange.com
+newrelic.com
+nr-data.net
+bugsnag.com
+sentry-cdn.com
+
+# Popup & pop-under
+propellerads.com
+popads.net
+popcash.net
+revcontent.com
+mgid.com
+adsterra.com
+
+# Lainnya
+adform.net
+adsafeprotected.com
+adroll.com
+bidswitch.net
+bluekai.com
+demdex.net
+everesttech.net
+krxd.net
+mathtag.com
+media.net
+tidaltv.com
+tribalfusion.com

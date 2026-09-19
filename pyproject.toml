@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frame-browser"
+version = "0.2.0"
+description = "Browser ringan berbasis PyQt6 WebEngine"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "PyQt6>=6.6",
+    "PyQt6-WebEngine>=6.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+perf = ["psutil>=5.9"]
+
+[project.scripts]
+frame = "frame.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["frame*"]
+
+[tool.setuptools.package-data]
+frame = ["data/*.txt", "data/*.json", "data/*.png"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --tb=short"
+pythonpath = ["."]

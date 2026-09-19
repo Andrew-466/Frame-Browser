@@ -1,0 +1,13 @@
+# Jalankan `pre-commit install` sekali untuk mengaktifkan.
+# Setelah itu setiap `git commit` akan otomatis menjalankan pytest.
+repos:
+  - repo: local
+    hooks:
+      - id: pytest-quick
+        name: pytest (fast)
+        entry: pytest -q --tb=short -x
+        language: system
+        pass_filenames: false
+        stages: [commit]
+        # Hanya jalan kalau ada perubahan di frame/ atau tests/
+        files: ^(frame|tests)/.*\.py$
